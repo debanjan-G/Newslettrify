@@ -5,8 +5,10 @@ const https = require("https");
 
 const app = express();
 
-const mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
+require("dotenv").config();
 
+const mailchimpApiKey = process.env.NODE_NEWSLETTER_MAILCHIMP_API_KEY;
+// const mailchimpApiKey = process.env.NODE_NEWSLETTER_MAILCHIMP_API_KEY;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,9 +38,10 @@ app.post("/", (req, res) => {
 
   const url = "https://us12.api.mailchimp.com/3.0/lists/0e76f5fe84";
 
+  const auth_value = "debanjan1:" + mailchimpApiKey;
   const options = {
     method: "POST",
-    auth: "debanjan1:" + mailchimpApiKey,
+    auth: auth_value,
   };
 
   const request = https.request(url, options, (response) => {
