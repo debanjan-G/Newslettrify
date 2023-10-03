@@ -60,6 +60,10 @@ app.post("/", (req, res) => {
   request.end();
 });
 
+app.post("/success", (req, res) => {
+  res.redirect("/");
+});
+
 app.post("/failure", (req, res) => {
   res.redirect("/");
 });
